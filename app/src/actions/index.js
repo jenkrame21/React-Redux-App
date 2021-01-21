@@ -1,23 +1,23 @@
 import axios from 'axios';
 
-export const FETCHING_INSULT_START = "FETCHING_INSULT_START";
-export const FETCHING_INSULT_SUCCESS = "FETCHING_INSULT_SUCCESS";
-export const FETCHING_INSULT_FAILURE = "FETCHING_INSULT_SUCCESS";
+export const FETCHING_CATFACT_START = "FETCHING_CATFACT_START";
+export const FETCHING_CATFACT_SUCCESS = "FETCHING_CATFACT_SUCCESS";
+export const FETCHING_CATFACT_FAILURE = "FETCHING_CATFACT_SUCCESS";
 
-export const getInsult = () => {
+export const getCatFact = () => {
     return (dispatch => {
 
-        dispatch({ type: FETCHING_INSULT_START });
+        dispatch({ type: FETCHING_CATFACT_START });
 
         axios
-            .get('https://evilinsult.com/api/#insults')
+            .get('https://cat-fact.herokuapp.com/facts/')
             .then((res) => {
                 console.log(res.data)
-                // dispatch({ type: FETCHING_INSULT_SUCCESS, payload: res.data});
+                dispatch({ type: FETCHING_CATFACT_SUCCESS, payload: res.data});
             })
             .catch((err) => {
                 console.log(err);
-                // dispatch({ type: FETCHING_INSULT_FAILURE, payload: err});
+                dispatch({ type: FETCHING_CATFACT_FAILURE, payload: err});
             });
     });
 };

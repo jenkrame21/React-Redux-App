@@ -1,12 +1,12 @@
 import './App.css';
-import Insults from './components/Insults';
+import CatFact from './components/CatFact';
 
 function App() {
   return (
     <div className="App">
-      <h1>Why are you even here?</h1>
-      <h2>You must be a masochist if you want to be insulted.</h2>
-      <Insults />
+      <h1>Random Cat Facts</h1>
+      <p>You must be extremely bored if you're looking for random facts about cats...</p>
+      <CatFact />
     </div>
   );
 }
