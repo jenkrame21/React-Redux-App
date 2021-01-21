@@ -1,17 +1,39 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
 
-const Insults = () => {
+import { getInsult } from '../actions';
 
-    const getInsulted = () => {
-        
-    }
+const Insults = ({ insult, isFetching, error, getInsult }) => {
+    useEffect(() => {
+        getInsult();
+    }, []);
+
+    if (error) {
+        return <h2>Got no insults for ya. Try again later. {error}</h2>;
+    };
+
+    if (isFetching) {
+        return <h2>Lemme think of that insult for ya.</h2>;
+    };
+    
+    const handleClick = () => {
+        getInsult();
+    };
 
     return(
         <>
-            <h2>--- Insult here ----</h2>
-            <button onClick={getInsulted}>Get Insulted</button>
+            <h2>{insult}</h2>
+            <button onClick={handleClick}>Get Insulted</button>
         </>
-    )
-}
+    );
+};
 
-export default Insults;
+const mapStateToProps = state => {
+    return {
+        insult: state.insult,
+        isFetching: state.isFetching,
+        error: state.error
+    };
+};
+
+export default connect(mapStateToProps, {getInsult})(Insults);

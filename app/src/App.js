@@ -1,5 +1,4 @@
 import './App.css';
-
 import Insults from './components/Insults';
 
 function App() {
